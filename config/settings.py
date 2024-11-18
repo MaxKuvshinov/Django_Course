@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
@@ -137,6 +138,8 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = os.getenv("EMAIL_ADMIN")
+PASSWORD_ADMIN = os.getenv("PASSWORD_ADMIN")
 
 LOGIN_REDIRECT_URL = ""
 LOGOUT_REDIRECT_URL = ""

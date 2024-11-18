@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+
 from .models import CustomUser
 
 
@@ -19,7 +20,8 @@ class CustomUserCreationForm(UserCreationForm):
         return phone_number
 
     def clean_avatar(self):
-        avatar = self.cleaned_data.get('avatar')
+        cleaned_data = super().clean()
+        avatar = cleaned_data.get("avatar")
 
         if avatar is None:
             return None
@@ -27,7 +29,7 @@ class CustomUserCreationForm(UserCreationForm):
         max_size = 5 * 1024 * 1024
         if avatar.size > max_size:
             raise forms.ValidationError('Размер файла превышает 5 MB.')
-        if not avatar.name.endswith(('.jpg', '.jpeg', '.png')):
+        if not avatar.name.lowe().endswith(('.jpg', '.jpeg', '.png')):
             raise forms.ValidationError('Формат файла не поддерживается. Допустимый формат файла: *.jpg, *.jpeg, *.png')
         return avatar
 
