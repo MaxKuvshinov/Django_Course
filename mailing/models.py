@@ -34,13 +34,14 @@ class Message(models.Model):
 
 
 class Mailing(models.Model):
-    STATUS_CHOICES = [('Создана', 'Создана'), ('Запущена', 'Запущена'), ('Завершена', 'Завершена')]
+    STATUS_CHOICES = [('Создана', 'Создана'), ('Запущена', 'Запущена'), ('Завершена', 'Завершена'), ('Блокирована', 'Блокирована')]
     start_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время первой отправки')
     end_time = models.DateTimeField(auto_now=True, verbose_name='Дата и время окончания отправки')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Создана', verbose_name='Статус')
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
     recipients = models.ManyToManyField(Recipient, verbose_name='Получатели')
     owner = models.ForeignKey(CustomUser, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Владелец')
+    is_block = models.BooleanField(default=False, verbose_name='Блокировка')
 
     def __str__(self):
         return f'Рассылка сообщения: {self.message}'
