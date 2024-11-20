@@ -12,6 +12,4 @@ class OwnerRequiredMixin(LoginRequiredMixin):
         try:
             return super().get_object(queryset)
         except self.model.DoesNotExist:
-            raise PermissionDenied(
-                f"У вас нет прав для доступа к {self.model._meta.verbose_name}."
-            )
+            raise PermissionDenied(f"У вас нет прав для доступа к {self.model._meta.verbose_name}.")

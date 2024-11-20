@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand
 class Command(BaseCommand):
     def handle(self, *args, **options):
         User = get_user_model()
-        user = User.objects.create(email=EMAIL_ADMIN, first_name='admin', last_name='admin')
+        user = User.objects.create(email=EMAIL_ADMIN, first_name="admin", last_name="admin")
 
         user.set_password(PASSWORD_ADMIN)
         user.is_staff = True
@@ -14,4 +14,4 @@ class Command(BaseCommand):
 
         user.save()
 
-        self.stdout.write(self.style.SUCCESS(f'Суперпользователь с email {user.email}, успешно создан.'))
+        self.stdout.write(self.style.SUCCESS(f"Суперпользователь с email {user.email}, успешно создан."))

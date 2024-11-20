@@ -1,19 +1,18 @@
-from django.core.mail import send_mail, BadHeaderError
+from config.settings import CACHE_ENABLED, EMAIL_HOST_USER
+from django.core.cache import cache
+from django.core.mail import BadHeaderError, send_mail
 from django.db import transaction
 from django.db.models import Q
 from django.utils import timezone
 
-from config.settings import CACHE_ENABLED, EMAIL_HOST_USER
-from django.core.cache import cache
-
-from .models import Mailing, Message, Recipient, MailingAttempt
+from .models import Mailing, MailingAttempt, Message, Recipient
 
 
 def get_recipient_from_cache():
     """Получение данных из кеша, если кеш пуст, то получает данные из БД."""
     if not CACHE_ENABLED:
         return Recipient.objects.all()
-    key = 'recipients_list'
+    key = "recipients_list"
     recipient = cache.get(key)
     if recipient is not None:
         return recipient
@@ -26,7 +25,7 @@ def get_mailing_from_cache():
     """Получает данные из кеша, если кеш пуст, то получает данные из БД."""
     if not CACHE_ENABLED:
         return Mailing.objects.all()
-    key = 'mailing_list'
+    key = "mailing_list"
     mailing = cache.get(key)
     if mailing is not None:
         return mailing
@@ -39,7 +38,7 @@ def get_message_from_cache():
     """Получает данные из кеша, если кеш пуст, то получает данные из БД."""
     if not CACHE_ENABLED:
         return Message.objects.all()
-    key = 'message_list'
+    key = "message_list"
     message = cache.get(key)
     if message is not None:
         return message
