@@ -56,7 +56,7 @@ class RecipientCreateView(LoginRequiredMixin, CreateView):
 class RecipientUpdateView(OwnerRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Recipient
     form_class = RecipientForm
-    template_name = 'recipient_update.html'
+    template_name = 'recipient_create.html'
     success_url = reverse_lazy('mailing:recipient_list')
 
 
@@ -112,7 +112,7 @@ class MessageCreateView(CreateView):
 class MessageUpdateView(OwnerRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Message
     form_class = MessageForm
-    template_name = 'message_update.html'
+    template_name = 'message_create.html'
     success_url = reverse_lazy('mailing:message_list')
 
 
@@ -172,7 +172,7 @@ class MailingCreateView(CreateView):
 class MailingUpdateView(OwnerRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Mailing
     form_class = MailingForm
-    template_name = 'mailing_update.html'
+    template_name = 'mailing_create.html'
     success_url = reverse_lazy('mailing:mailing_list')
 
 
@@ -212,8 +212,8 @@ class SendMailingView(View):
 
 class MailingAttemptListView(ListView):
     model = MailingAttempt
-    template_name = 'mailing_attempt_list.html'
-    context_object_name = 'mailing_attempt_list'
+    template_name = 'attempt_list.html'
+    context_object_name = 'attempt_list'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -247,4 +247,4 @@ class BlockMailingView(LoginRequiredMixin, View):
         mailing.status = 'Блокирована' if mailing.status != 'Блокирована' else 'Создана'
         mailing.save()
 
-        return redirect('mailing:mailing_list')
+        return redirect('mailing:attempt_list')
