@@ -40,7 +40,7 @@
                 {% endif %}
                 {% if user == mailing.owner or user.is_staff %}
                     {% if not mailing.is_block %}
-                        <a href="{% url 'mailing:send_mailing' mailing.pk %}" class="btn btn-success">
+                        <a href="{% url 'mailing:start_mailing' mailing.pk %}" class="btn btn-success">
                             {% if mailing.status == "Создана" %}
                                 Отправить рассылку
                             {% else %}

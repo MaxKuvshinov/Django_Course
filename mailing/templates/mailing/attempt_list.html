@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 {% if mailing_attempt_list %}
-                    {% for mailingattempt in mailing_attempt_list %}
+                    {% for mailingattempt in attempt_list %}
                         {% if user == message.owner or user.is_staff or user.is_authenticated %}
                             <tr>
                                 <td>{{ mailingattempt.mailing.message.subject }}</td>
