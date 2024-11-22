@@ -29,7 +29,7 @@
                         {% if user == mailing.owner or user.is_staff or perms.mailing.can_view_mailings_of_all_recipients or user.is_authenticated %}
                             <tr>
                                 <td>
-                                    <a href="{% url 'mailing:mailing_detail' mailing.id %}">Рассылка {{ mailing.id }} с темой сообщения: {{ mailing.message }}</a>
+                                    <a href="{% url 'mailing:mailing_detail' mailing.id %}">Рассылка {{ mailing.id }} с темой сообщения: {{ mailing.subject }}</a>
                                 </td>
                                 <td>
                                     {{ mailing.get_status_display }}
